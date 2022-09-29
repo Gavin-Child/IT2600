@@ -1,0 +1,18 @@
+<?php
+$dsn = 'mysql:host=localhost;dbname=it1150';
+$username = 'mgs_user';
+$password = 'pa55word';
+$db = new PDO($dsn, $username, $password);
+$query = "SELECT course_id,title,credit_hrs FROM courses;"; 
+$statement = $db->prepare($query); 
+$statement->execute();
+$courses = $statement->fetchAll();
+$statement->closeCursor();
+?>
+
+<?php foreach ($courses as $course) { ?> 
+<tr>
+<td><?php echo $course['course_id']; ?></td> 
+<td><?php echo $course['title']; ?></td> 
+<td><?php echo $course['credit_hrs']; ?></td>
+</tr> <?php } ?>
